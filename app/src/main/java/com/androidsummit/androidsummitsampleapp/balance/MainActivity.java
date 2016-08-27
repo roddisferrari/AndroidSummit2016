@@ -1,6 +1,7 @@
 package com.androidsummit.androidsummitsampleapp.balance;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.androidsummit.androidsummitsampleapp.BuildConfig;
 import com.androidsummit.androidsummitsampleapp.R;
 import com.reimaginebanking.api.nessieandroidsdk.NessieError;
@@ -37,9 +39,12 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.set_goal_card)
     ViewGroup setGoalCardContainer;
+
     @BindView(R.id.progress_bar_header_container)
     ViewGroup progressBarHeaderContainer;
 
+    @BindView(R.id.progress_header_progress_bar)
+    RoundCornerProgressBar progressBar;
 
     TransactionListAdapter transactionListAdapter;
 
@@ -68,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         transactionsList.setAdapter(transactionListAdapter);
 
         setupHeader();
+
     }
 
     @OnClick(R.id.main_purchase_goal_container)
@@ -98,6 +104,12 @@ public class MainActivity extends AppCompatActivity {
 
         setGoalCardContainer.setVisibility(View.GONE);
         progressBarHeaderContainer.setVisibility(View.VISIBLE);
+
+        progressBar.setProgressColor(Color.parseColor("#56d2c2"));
+        progressBar.setProgressBackgroundColor(Color.parseColor("#757575"));
+        progressBar.setMax(550);
+        progressBar.setProgress(147);
+
     }
 
     private NessieResultsListener accountListener =  new NessieResultsListener() {

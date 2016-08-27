@@ -2,17 +2,18 @@
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#FFF"
-              android:orientation="vertical"
-              android:paddingBottom="@dimen/activity_vertical_margin"
-              android:paddingLeft="@dimen/activity_horizontal_margin"
-              android:paddingRight="@dimen/activity_horizontal_margin"
-              android:paddingTop="@dimen/activity_vertical_margin"
-              android:theme="@style/AppTheme"
-              tools:showIn="@layout/activity_main">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:theme="@style/AppTheme"
+    tools:showIn="@layout/activity_main">
 
     <android.support.v7.widget.CardView
         android:id="@+id/main_purchase_goal_container"
@@ -38,28 +39,25 @@
                 android:id="@+id/progress_header_account_balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:text="$200"/>
+                android:text="$200"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/progress_header_account_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/progress_header_account_balance"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:layout_below="@id/progress_header_account_balance"
-                android:text="needed to reach goal"/>
+                android:text="needed to reach goal" />
 
-            <ProgressBar
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
                 android:id="@+id/progress_header_progress_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_below="@id/progress_header_account_message"
-                android:layout_marginTop="32dp"
-                style="@android:style/Widget.ProgressBar.Large"
-                android:progress="55"/>
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
