@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Balance</string>
 
+    <string name="savings_goal_label">Set a Savings Goal</string>
 </resources>
