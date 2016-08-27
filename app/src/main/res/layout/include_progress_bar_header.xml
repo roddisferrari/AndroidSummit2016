@@ -24,6 +24,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_mode_edit_black_24dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:background="?selectableItemBackground"
+                android:clickable="true"/>
+
             <TextView
                 android:id="@+id/progress_header_account_balance"
                 android:layout_width="wrap_content"
