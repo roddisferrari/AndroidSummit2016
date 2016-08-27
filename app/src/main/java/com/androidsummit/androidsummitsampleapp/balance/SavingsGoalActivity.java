@@ -24,6 +24,8 @@ public class SavingsGoalActivity extends AppCompatActivity {
         return intent;
     }
 
+    private DataManager dataManager;
+
     @BindView(R.id.savings_goal_amount)
     EditText goalAmount;
 
@@ -69,6 +71,10 @@ public class SavingsGoalActivity extends AppCompatActivity {
 
         goalAmount.addTextChangedListener(textChangeListener);
         goalDescription.addTextChangedListener(textChangeListener);
+
+        dataManager = DataManager.getInstance();
+
+        accountAvailableBalance.setText("Available Balance: $" + dataManager.getAccountBalance());
     }
 
     private void onEditTextChanged() {
