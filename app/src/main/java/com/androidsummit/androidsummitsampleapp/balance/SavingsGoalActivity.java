@@ -45,10 +45,14 @@ public class SavingsGoalActivity extends AppCompatActivity {
         public void afterTextChanged(Editable s) { }
     };
 
+    private SavingGoalStore savingGoalStore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_savings_goal);
+
+        savingGoalStore = new SavingGoalStore(this);
 
         ButterKnife.bind(this);
 
@@ -59,15 +63,29 @@ public class SavingsGoalActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         goalAmount.addTextChangedListener(textChangeListener);
         goalDescription.addTextChangedListener(textChangeListener);
     }
 
     private void onEditTextChanged() {
 
-        boolean hasDescription = !TextUtils.isEmpty(goalDescription.getText());
-        boolean hasAmount = !TextUtils.isEmpty(goalAmount.getText());
+        String amountAsString = goalAmount.getText().toString();
+        String description = goalDescription.getText().toString();
+
+        boolean hasDescription = !TextUtils.isEmpty(description);
+        boolean hasAmount = !TextUtils.isEmpty(amountAsString);
+
+        long amount = 0;
+        if (hasAmount) {
+            try {
+                amount = Long.valueOf(amountAsString);
+            } catch (NumberFormatException ex) {
+                // Ignore
+            }
+        }
+
+
+        savingGoalStore.update(description, amount);
 
         toolbar.setNavigationIcon(hasDescription && hasAmount ? R.drawable.ic_done : R.drawable.ic_close);
 
