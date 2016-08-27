@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.androidsummit.androidsummitsampleapp.R;
 
@@ -31,6 +32,9 @@ public class SavingsGoalActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    @BindView(R.id.avaialble_balance)
+    TextView accountAvailableBalance;
 
     private TextWatcher textChangeListener = new TextWatcher() {
         @Override

@@ -34,6 +34,7 @@
             android:text="360 Checking\t...8790" />
 
         <TextView
+            android:id="@+id/avaialble_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Base.TextAppearance.AppCompat.Medium"
