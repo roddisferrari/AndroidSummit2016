@@ -135,10 +135,12 @@ public class MainActivity extends AppCompatActivity {
 
             long goalAmmount = savingGoalStore.getAmount();
 
-            double difference  = goalAmmount - balance;
+            boolean isGoalComplete =  goalAmmount <= balance;
+
+            double difference  = isGoalComplete ? 0 : goalAmmount - balance;
 
             progressBar.setMax(goalAmmount);
-            progressBar.setProgress(balance);
+            progressBar.setProgress(isGoalComplete ? goalAmmount : balance);
 
             accountHeaderBalanceTextView.setText(String.format("$%.2f", difference));
 
