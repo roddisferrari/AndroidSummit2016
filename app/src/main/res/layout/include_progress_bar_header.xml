@@ -47,7 +47,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/progress_header_account_message"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
+                style="@android:style/Widget.ProgressBar.Large"
                 android:progress="55"/>
 
         </RelativeLayout>
