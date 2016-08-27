@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.androidsummit.androidsummitsampleapp.BuildConfig;
@@ -33,7 +35,14 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_transaction_list)
     RecyclerView transactionsList;
 
+    @BindView(R.id.set_goal_card)
+    ViewGroup setGoalCardContainer;
+    @BindView(R.id.progress_bar_header_container)
+    ViewGroup progressBarHeaderContainer;
+
+
     TransactionListAdapter transactionListAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +66,38 @@ public class MainActivity extends AppCompatActivity {
 
         transactionsList.setLayoutManager(new LinearLayoutManager(this));
         transactionsList.setAdapter(transactionListAdapter);
+
+        setupHeader();
     }
 
     @OnClick(R.id.main_purchase_goal_container)
     void onPurchaseGoalClicked() {
         Intent purchaseGoalActivity = SavingsGoalActivity.createLaunchIntent(this);
         startActivity(purchaseGoalActivity);
+    }
+
+
+    private void setupHeader(){
+
+        SavingGoalStore savingGoalStore = new SavingGoalStore(getApplicationContext());
+
+        if(savingGoalStore.getName() != null) {
+            showProgressBarHeader();
+        } else {
+            showSetGoalHeader();
+        }
+    }
+
+    private void showSetGoalHeader() {
+
+        setGoalCardContainer.setVisibility(View.VISIBLE);
+        progressBarHeaderContainer.setVisibility(View.GONE);
+    }
+
+    private void showProgressBarHeader() {
+
+        setGoalCardContainer.setVisibility(View.GONE);
+        progressBarHeaderContainer.setVisibility(View.VISIBLE);
     }
 
     private NessieResultsListener accountListener =  new NessieResultsListener() {

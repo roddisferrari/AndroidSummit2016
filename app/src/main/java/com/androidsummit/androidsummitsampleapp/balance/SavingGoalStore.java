@@ -26,7 +26,7 @@ public class SavingGoalStore {
 
         sharedPreferences.edit()
                 .putString(KEY_NAME, name)
-                .putLong(KEY_NAME, amount)
+                .putLong(KEY_AMOUNT, amount)
                 .apply();
     }
 
