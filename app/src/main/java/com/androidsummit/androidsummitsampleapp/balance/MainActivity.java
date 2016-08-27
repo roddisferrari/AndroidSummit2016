@@ -13,7 +13,10 @@ import com.androidsummit.androidsummitsampleapp.R;
 import com.reimaginebanking.api.nessieandroidsdk.NessieError;
 import com.reimaginebanking.api.nessieandroidsdk.NessieResultsListener;
 import com.reimaginebanking.api.nessieandroidsdk.models.Account;
+import com.reimaginebanking.api.nessieandroidsdk.models.Purchase;
 import com.reimaginebanking.api.nessieandroidsdk.requestclients.NessieClient;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         mClient.ACCOUNT.getAccount(Constants.ACCOUNT_ID, accountListener);
 
+        mClient.PURCHASE.getPurchasesByAccount(Constants.ACCOUNT_ID, purchaseListener);
         transactionListAdapter = new TransactionListAdapter(this);
 
         transactionsList.setLayoutManager(new LinearLayoutManager(this));
@@ -69,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
             Account accountResponse = (Account) result;
             dManager.setAccountBalance(accountResponse.getBalance().intValue());
             accountBalanceTextView.setText("Your account balance is $" + accountResponse.getBalance().toString());
+
+
+
         }
 
         @Override
@@ -77,5 +84,21 @@ public class MainActivity extends AppCompatActivity {
             accountBalanceTextView.setText("Oops");
         }
     };
+
+
+    private NessieResultsListener purchaseListener = new NessieResultsListener() {
+
+        @Override
+        public void onSuccess(Object result) {
+            List<Purchase> purchases = (List<Purchase>) result;
+            dManager.setPurchaseList(purchases);
+            transactionListAdapter.update(purchases);
+        }
+
+        @Override
+        public void onFailure(NessieError error) {
+        }
+    };
+
 
 }
