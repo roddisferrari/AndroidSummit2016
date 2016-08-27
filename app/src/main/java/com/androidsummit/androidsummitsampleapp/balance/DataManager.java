@@ -46,4 +46,19 @@ public class DataManager {
 
         return depositList;
     }
+
+    public void setAccountBalance(int accountBalance) {
+
+        this.accountBalance = accountBalance;
+    }
+
+    public void setPurchaseList(List<Purchase> purchaseList) {
+
+        this.purchaseList = purchaseList;
+    }
+
+    public void setDepositList(List<Deposit> depositList) {
+
+        this.depositList = depositList;
+    }
 }
