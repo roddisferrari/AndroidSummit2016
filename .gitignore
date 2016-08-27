@@ -8,6 +8,5 @@
 /gradle.properties
 
 # Firebase
-/app/google-services.json
 app/.idea
 app/gradle
