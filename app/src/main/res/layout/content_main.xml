@@ -15,7 +15,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="@dimen/card_default_height">
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,16 +29,16 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_marginTop="8dp">
+        android:layout_height="@dimen/card_default_height"
+        android:layout_marginTop="@dimen/default_margin"
+        android:id="@+id/main_purchase_goal_container">
 
-        <Button
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Set a purchase goal"
-            android:gravity="center"
-            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_gravity="center"
             android:id="@+id/main_purchase_goal" />
 
     </android.support.v7.widget.CardView>
