@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_balance)
     TextView accountBalanceTextView;
 
+    @BindView(R.id.progress_header_account_balance)
+    TextView accountHeaderBalanceTextView;
+
     @BindView(R.id.main_transaction_list)
     RecyclerView transactionsList;
 
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     RoundCornerProgressBar progressBar;
 
     TransactionListAdapter transactionListAdapter;
-
+    SavingGoalStore savingGoalStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        savingGoalStore = new SavingGoalStore(getApplicationContext());
 
         dManager = DataManager.getInstance();
 
@@ -83,9 +88,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void setupHeader(){
+    @OnClick(R.id.progress_header_goal_edit)
+    void onEditPurchaseGoalClicked() {
+        Intent purchaseGoalActivity = SavingsGoalActivity.createLaunchIntent(this);
+        startActivity(purchaseGoalActivity);
+    }
 
-        SavingGoalStore savingGoalStore = new SavingGoalStore(getApplicationContext());
+
+    private void setupHeader(){
 
         if(savingGoalStore.getName() != null) {
             showProgressBarHeader();
@@ -107,8 +117,6 @@ public class MainActivity extends AppCompatActivity {
 
         progressBar.setProgressColor(Color.parseColor("#56d2c2"));
         progressBar.setProgressBackgroundColor(Color.parseColor("#757575"));
-        progressBar.setMax(550);
-        progressBar.setProgress(147);
 
     }
 
@@ -118,16 +126,27 @@ public class MainActivity extends AppCompatActivity {
         public void onSuccess(Object result) {
 
             Account accountResponse = (Account) result;
-            dManager.setAccountBalance(accountResponse.getBalance().intValue());
-            accountBalanceTextView.setText("Your account balance is $" + accountResponse.getBalance().toString());
 
+            final Integer balanceInteger = accountResponse.getBalance();
+            final int balance = balanceInteger == null ? 0 : balanceInteger.intValue();
+
+            dManager.setAccountBalance(balance);
+            accountBalanceTextView.setText("Your account balance is $" + balance);
+
+            long goalAmmount = savingGoalStore.getAmount();
+
+            double difference  = goalAmmount - balance;
+
+            progressBar.setMax(goalAmmount);
+            progressBar.setProgress(balance);
+
+            accountHeaderBalanceTextView.setText(String.format("$%.2f", difference));
 
 
         }
 
         @Override
         public void onFailure(NessieError error) {
-
             accountBalanceTextView.setText("Oops");
         }
     };

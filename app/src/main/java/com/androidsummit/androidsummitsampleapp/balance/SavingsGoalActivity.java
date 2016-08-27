@@ -69,12 +69,18 @@ public class SavingsGoalActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        goalAmount.setText(String.valueOf(savingGoalStore.getAmount()));
+        goalDescription.setText(savingGoalStore.getName());
+
         goalAmount.addTextChangedListener(textChangeListener);
         goalDescription.addTextChangedListener(textChangeListener);
 
         dataManager = DataManager.getInstance();
 
         accountAvailableBalance.setText("Available Balance: $" + dataManager.getAccountBalance());
+
+
+
     }
 
     private void onEditTextChanged() {
