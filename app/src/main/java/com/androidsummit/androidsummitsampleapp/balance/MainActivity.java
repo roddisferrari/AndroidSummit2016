@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.androidsummit.androidsummitsampleapp.BuildConfig;
@@ -22,13 +21,14 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.main_transaction_list)
-    RecyclerView transactionsList;
     private NessieClient mClient;
     private DataManager dManager;
 
     @BindView(R.id.main_balance)
     TextView accountBalanceTextView;
+
+    @BindView(R.id.main_transaction_list)
+    RecyclerView transactionsList;
 
     TransactionListAdapter transactionListAdapter;
 
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         mClient.ACCOUNT.getAccount(Constants.ACCOUNT_ID, accountListener);
 
-        transactionListAdapter = new TransactionListAdapter();
+        transactionListAdapter = new TransactionListAdapter(this);
 
         transactionsList.setLayoutManager(new LinearLayoutManager(this));
         transactionsList.setAdapter(transactionListAdapter);
