@@ -3,6 +3,8 @@ package com.androidsummit.androidsummitsampleapp.balance;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
@@ -20,11 +22,15 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
+    @BindView(R.id.main_transaction_list)
+    RecyclerView transactionsList;
     private NessieClient mClient;
     private DataManager dManager;
 
     @BindView(R.id.main_balance)
     TextView accountBalanceTextView;
+
+    TransactionListAdapter transactionListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
         mClient.ACCOUNT.getAccount(Constants.ACCOUNT_ID, accountListener);
 
+        transactionListAdapter = new TransactionListAdapter();
+
+        transactionsList.setLayoutManager(new LinearLayoutManager(this));
+        transactionsList.setAdapter(transactionListAdapter);
     }
 
     @OnClick(R.id.main_purchase_goal_container)
